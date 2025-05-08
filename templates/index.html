@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Irrigation Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <i class="fas fa-leaf"></i>
+      <span class="logo-text">Smart Irrigation</span>
+      <button id="toggleSidebar" class="toggle-btn-top">
+        <i class="fas fa-angle-double-left" id="toggleIcon"></i>
+      </button>
+    </div>
+
+    <a href="/" class="sidebar-link"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a>
+    <a href="/weekly" class="sidebar-link"><i class="fas fa-calendar-week"></i> <span>Weekly Report</span></a>
+    <a href="/summary" class="sidebar-link"><i class="fas fa-file-alt"></i> <span>Summary</span></a>
+    <a href="/export/docx" class="sidebar-link"><i class="fas fa-print"></i> <span>Print Report</span></a>
+    <a href="/settings" class="sidebar-link"><i class="fas fa-cog"></i> <span>Settings</span></a>
+
+    <div class="toggle-bottom-wrapper">
+      <button id="toggleSidebarBottom" class="toggle-btn-bottom d-none">
+        <i class="fas fa-angle-double-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="main-content" id="mainContent">
+    <h2 class="mb-4">Monitoring Overview</h2>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="status-card">
+          <h6>Status Koneksi</h6>
+          <div class="value text-success">Connected</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="status-card">
+          <h6>Redis Cache</h6>
+          <div class="value text-info">Active</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="status-card">
+          <h6>Server Uptime</h6>
+          <div class="value text-primary">99.98%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <div class="status-card">
+          <h6>Soil Moisture (%)</h6>
+          <canvas id="moistureChart"></canvas>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="status-card">
+          <h6>pH Tanah</h6>
+          <canvas id="phChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="status-card">
+          <h6>Latency Monitor</h6>
+          <canvas id="latencyChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="status-card text-center">
+          <h6>Kontrol Manual</h6>
+          <button class="btn btn-success me-3" onclick="sendCommand('on')">Nyalakan Pompa</button>
+          <button class="btn btn-danger" onclick="sendCommand('off')">Matikan Pompa</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="status-card text-center">
+          <h6>Ekspor Harian</h6>
+          <button class="btn btn-outline-primary" onclick="exportDaily('docx')">
+            <i class="fas fa-file-word"></i> Ekspor ke DOCX
+          </button>
+          <button class="btn btn-outline-success ms-2" onclick="exportDaily('csv')">
+            <i class="fas fa-file-csv"></i> Ekspor ke CSV
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="/static/js/main.js"></script>
+  <script src="/static/js/sidebar_toggle.js"></script>
+</body>
+</html>
